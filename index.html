@@ -112,7 +112,7 @@
           <!-- Your image here -->
           
           <div style="text-align: center;">
-            <img src="static/images/combined.png" style="width: 80%;" alt="MY ALT TEXT"/>
+            <img src="static/images/combined.png" alt="MY ALT TEXT"/>
           </div>
           
           <h4 class="subtitle is-6 has-text-centered" style="margin-top: +0.1em; color: gray; font-size: medium;">
@@ -135,15 +135,12 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Diffusion models have recently gained unprecedented attention in the field of image synthesis due to their remarkable generative capabilities. 
-            Notwithstanding their prowess, these models often incur substantial computational costs, primarily attributed to the sequential denoising process and cumbersome model size. 
-            Traditional methods for compressing diffusion models typically involve extensive retraining, presenting cost and feasibility challenges. 
-            In this paper, we introduce DeepCache, a novel training-free paradigm that accelerates diffusion models from the perspective of model architecture. 
-            DeepCache capitalizes on the inherent temporal redundancy observed in the sequential denoising steps of diffusion models, which caches and retrieves features across adjacent denoising stages, thereby curtailing redundant computations. 
-            Utilizing the property of the U-Net, we reuse the high-level features while updating the low-level features in a very cheap way. This innovative strategy, in turn, enables a speedup factor of 2.3X for Stable Diffusion v1.5 with only a 0.05 decline in CLIP Score, and 4.1X for LDM-4-G with a slight decrease of 0.22 in FID  on ImageNet. Our experiments also demonstrate DeepCache's superiority over existing pruning and distillation methods that necessitate retraining and its compatibility with current sampling techniques. Furthermore, we find that under the same throughput, DeepCache effectively achieves comparable or even marginally improved results with DDIM or PLMS.
+            Diffusion models have garnered significant interest from the community for their great generative ability across various applications. However, their typical multi-step sequential-denoising nature gives rise to high cumulative latency, thereby precluding the possibilities of parallel computation. To address this, we introduce AsyncDiff, a universal and plug-and-play acceleration scheme that enables model parallelism across multiple devices. Our approach divides the cumbersome noise prediction model into multiple components, assigning each to a different device. To break the dependency chain between these components, it transforms the conventional sequential denoising into an asynchronous process by exploiting the high similarity between hidden states in consecutive diffusion steps. Consequently, each component is facilitated to compute in parallel on separate devices.
+The proposed strategy significantly reduces inference latency while minimally impacting the generative quality. Specifically, for the Stable Diffusion v2.1, AsyncDiff achieves a 2.7x speedup with negligible degradation and a 4.0x speedup with only a slight reduction of 0.38 in CLIP Score, on four NVIDIA A5000 GPUs. 
+Our experiments also demonstrate AsyncDiff can be readily applied to video diffusion models with encouraging performances.
           </p>
           <p>
-            <b>Keywords: Diffusion Models, Training-free, Acceleration</b>
+            <b>Keywords: Diffusion Models, Distributed Inference, Model Parallelism, Acceleration</b>
           </p>
         </div>
       </div>
